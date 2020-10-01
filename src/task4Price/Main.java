@@ -13,30 +13,32 @@ public class Main {
 
         Price[] priceList = new Price[2];
 
+        // Ты создаешь сканнер два раза внутри цикла и один раз в конце программы
+        // Можно создать его один раз в данной случае
+        Scanner sc = new Scanner(System.in);
+
         for (int i = 0; i < 2; i++) {
-            Scanner sc = new Scanner(System.in);
             System.out.println("Enter the name of the product: ");
             productName = sc.nextLine();
 
             System.out.println("Enter the name of the shop: ");
             shopName = sc.nextLine();
 
+
             boolean poop = true;
             while(poop) {
                 try {
                     System.out.println("Enter the price: ");
                     price = sc.nextDouble();
-                    poop = false;
-                } catch (Exception e) {
-                    System.out.println(e.getMessage() + "Try again");
-                    sc.next();
-                }
-                try {
                     if (price < 0) {
                         throw new Exception("Incorrect price data.");
                     }
+                    poop = false;
+//                } catch (NumberFormatException e) {
+//                    System.out.println(e.getMessage() + "\nTry again");
+                // Здесь можно обойтись даже одним catch-блоком
                 } catch (Exception e) {
-                    System.out.println(e.getMessage() + "Try again");
+                    System.out.println(e.getMessage() + "\nTry again");
                 }
             }
 
@@ -45,7 +47,7 @@ public class Main {
             System.out.println(currentPrice.toString());
             System.out.println("the end");
         }
-        System.out.println(priceList.toString());
+        System.out.println(priceList.toString()); // Посмотри, что ты тут печатаешь
         for (Price values:
                 priceList) {
             System.out.println("Unsorted Name: " + values.getShopName());
@@ -59,20 +61,19 @@ public class Main {
         }
 
         String shopName2;
-        Scanner sc2 = new Scanner(System.in);
         System.out.println("Enter the name of the required shop: ");
-        shopName2 = sc2.nextLine();
+        shopName2 = sc.nextLine();
 
         for (Price count:
                 priceList) {
             try {
-                boolean availableShop = (shopName2.equalsIgnoreCase(count.shopName));
+                boolean availableShop = (shopName2.equalsIgnoreCase(count.shopName)); // для чего эта переменная?
                 System.out.println("The product " + count.getProductName() +
                             "\nis available at the shop " + count.getShopName() +
                             "\nat the price " + count.getPrice() + " rub.");
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
-            }
         }
+    }
 }

@@ -25,10 +25,6 @@ public class Worker implements Comparable<Worker> {
     }
 
     public int compareTo(Worker other) {
-        // return String.compareTo(name, other.name);
-        // compareTo сравнивает передаваемый объект с объектом, от которого этот метод вызван.
-        // Т.е. его надо вызывать так: строка.compareTo(другая_строка)
-        // https://docs.oracle.com/javase/8/docs/api/java/lang/String.html#compareTo-java.lang.String-
-        return this.name.compareTo(other.getName());
+        return this.name.compareTo(other.name);
     }
 }

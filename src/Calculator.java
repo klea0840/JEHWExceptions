@@ -25,13 +25,14 @@ public class Calculator {
     double div(double num1, double num2) {
 
         // TODO: сделать без приведения к int
-        if (num2 == 0) {
-            int num3 = (int) num1;
-            int num4 = (int) num2;
+
+        if(num2 == 0) {
 
             try {
-                int value =  num3 / num4;
-            } catch (ArithmeticException e) {
+                double value = num1 / num2;
+                boolean isInfinite = Double.isInfinite(value);
+                throw new Exception("by zero");
+            } catch (Exception e) {
                 System.out.println("Exception processing...");
                 System.out.println(e.getMessage());
             }

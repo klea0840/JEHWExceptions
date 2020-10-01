@@ -30,32 +30,39 @@ public class Main {
             }
             System.out.println("Enter the job title: ");
             position = sc.nextLine();
-            try{
-                for (char c:
-                        position.toCharArray()) {
-                    if(Character.isDigit(c)) {
-                        throw new Exception("Incorrect symbols.");
-                    }
-                }
-            } catch(Exception e) {
-                System.out.println(e.getMessage() + "Try again");
-            }
+            // В задаче не требуется проверять должность, поэтому это пока опустим
+//            try{
+//                for (char c:
+//                        position.toCharArray()) {
+//                    if(Character.isDigit(c)) {
+//                        throw new Exception("Incorrect symbols.");
+//                    }
+//                }
+//            } catch(Exception e) {
+//                System.out.println(e.getMessage() + "Try again");
+//            }
             System.out.println("Enter the year of hiring: ");
-            year = sc.nextInt();
+
+            // Посмотри на 49-ю и 54 строки. Ты дважды пытаешься прочесть год, и первый вызов не внутри try-catch.
+            // Поэтому он не ловит это исключение. Если уберешь 49-ю строку, то все будет ОК.
+
+//            year = sc.nextInt();
             //здесь попыталась ловить исключение InputMismatchException, однако он не ловит
+
             // код выглядел так:
-            // try{
-            //      year = sc.nextInt(); //* по идее, выбрасываемое здесь исключение должен был ловить кэч
-            // } catch(Exception e) {
-            //                System.out.println(e.getMessage() + "Try again");
-            //            }
-            try{
-               if(year < 1930) {
-                   throw new Exception("Incorrect year data.");
-               }
-            } catch(Exception e) {
-                System.out.println(e.getMessage() + "Try again");
-            }
+             try{
+                  year = sc.nextInt(); //* по идее, выбрасываемое здесь исключение должен был ловить кэч
+             } catch(Exception e) {
+                            System.out.println(e.getMessage() + "Try again");
+                            year = 1999; // присваиваем какое-нибудь предустановленное значение
+                        }
+//            try{
+//               if(year < 1930) {
+//                   throw new Exception("Incorrect year data.");
+//               }
+//            } catch(Exception e) {
+//                System.out.println(e.getMessage() + "Try again");
+//            }
 
             Worker worker = new Worker(name, position, year);
             workersList[i] = worker;

@@ -24,6 +24,7 @@ public class Calculator {
 
     double div(double num1, double num2) {
 
+        // TODO: сделать без приведения к int
         if (num2 == 0) {
             int num3 = (int) num1;
             int num4 = (int) num2;

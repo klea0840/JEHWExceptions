@@ -48,6 +48,7 @@ public class Main {
             System.out.println("the end");
         }
         System.out.println(priceList.toString()); // Посмотри, что ты тут печатаешь
+//        //*Это просто проверка для понимания, что массив сформировался, а еще освоение toString
         for (Price values:
                 priceList) {
             System.out.println("Unsorted Name: " + values.getShopName());
@@ -64,10 +65,14 @@ public class Main {
         System.out.println("Enter the name of the required shop: ");
         shopName2 = sc.nextLine();
 
+        //*еще не понимаю, как заставить сканировать, без исключений на тех элементах,
+        // которые существуют в массиве, но не совпадают с введенным названием.
+        // В текущем варианте он выдает исключение по элементам, где совпадения нет.
         for (Price count:
                 priceList) {
             try {
-                boolean availableShop = (shopName2.equalsIgnoreCase(count.shopName)); // для чего эта переменная?
+                boolean availableShop = true;//изначально сделала черех иф, может, сначала присвоить значение?
+                availableShop = (shopName2.equalsIgnoreCase(count.shopName)); // для чего эта переменная?
                 System.out.println("The product " + count.getProductName() +
                             "\nis available at the shop " + count.getShopName() +
                             "\nat the price " + count.getPrice() + " rub.");

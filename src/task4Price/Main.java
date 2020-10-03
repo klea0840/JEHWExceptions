@@ -1,6 +1,7 @@
 package task4Price;
 
 import java.util.Arrays;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
@@ -13,11 +14,10 @@ public class Main {
 
         Price[] priceList = new Price[2];
 
-        // Ты создаешь сканнер два раза внутри цикла и один раз в конце программы
-        // Можно создать его один раз в данной случае
-        Scanner sc = new Scanner(System.in);
+        Scanner sc;
 
         for (int i = 0; i < 2; i++) {
+            sc = new Scanner(System.in);
             System.out.println("Enter the name of the product: ");
             productName = sc.nextLine();
 
@@ -31,13 +31,23 @@ public class Main {
                     System.out.println("Enter the price: ");
                     price = sc.nextDouble();
                     if (price < 0) {
-                        throw new Exception("Incorrect price data.");
+                        throw new IllegalArgumentException("Incorrect price data.");
                     }
                     poop = false;
-//                } catch (NumberFormatException e) {
-//                    System.out.println(e.getMessage() + "\nTry again");
-                // Здесь можно обойтись даже одним catch-блоком
-                } catch (Exception e) {
+                /* Я немножко ошибся.
+                 * Одним catch'ем здесь не обойтись. У нас по сути два исключения, которые требуют разных действий.
+                 * Когда введено корректное, но отрицательное значение, нам нужно просто снова запросить ввод
+                 * корректного значения.
+                 */
+                } catch (IllegalArgumentException e) {
+                    System.out.println(e.getMessage() + "\nTry again");
+                /*
+                 * Когда же введено некорректное значение, нам надо перед запросом нового очистить введенную строку,
+                 * потому что эти символы в противном случае остаются в буфере. В данном случае достаточно просто
+                 * прочесть next()-ом.
+                 */
+                } catch (InputMismatchException e) {
+                    sc.next();
                     System.out.println(e.getMessage() + "\nTry again");
                 }
             }
@@ -63,6 +73,7 @@ public class Main {
 
         String shopName2;
         System.out.println("Enter the name of the required shop: ");
+        sc = new Scanner(System.in);
         shopName2 = sc.nextLine();
 
         //*еще не понимаю, как заставить сканировать, без исключений на тех элементах,
